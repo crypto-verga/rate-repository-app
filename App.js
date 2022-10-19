@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View } from 'react-native'
 import _raw from './data.xlsx' //este archivo esta en mi ubicacion, contiene el texto "Hola Mundo!!..."
@@ -15,13 +15,18 @@ const splitData = res => {
 }
 
 function exceldata(){
-  const [raw, setRaw] = useState([]);
+  const [datos, setDatos] = useState()
   
   fetch(_raw)
     .then(res => { return res.arrayBuffer() })
-    .then(setRaw(splitData))
+    .then(splitData)
+    .then(data => {
+      
+      console.log(data)
+      setDatos(data)
+    })
 
-  return raw
+  return datos
 }
 
 console.log(exceldata())
